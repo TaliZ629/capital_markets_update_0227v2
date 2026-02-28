@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Capital Markets Weekly — Feb 27, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0d1117;
+    --ink-mid: #2a3240;
+    --ink-light: #5c6880;
+    --paper: #f5f2eb;
+    --paper-warm: #ede9df;
+    --rule: #c8c0b0;
+    --accent: #c0392b;
+    --accent2: #1a5276;
+    --green: #1e6b45;
+    --red: #b03a2e;
+    --gold: #b7860d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Syne', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  /* ─── MASTHEAD ─── */
+  .masthead { border-bottom: 3px solid var(--ink); padding: 2rem 4rem 0.3rem; position: relative; overflow: visible; }
+  .masthead::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 39px, var(--rule) 39px, var(--rule) 40px); opacity: 0.25; pointer-events: none; }
+  .masthead-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; position: relative; }
+  .masthead-left { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); line-height: 1.8; }
+  .masthead-title { text-align: center; }
+  .masthead-title h1 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(2.2rem, 4vw, 3.4rem); letter-spacing: -0.01em; line-height: 1.4; padding: 0.15em 0 0.25em; display: block; }
+  .masthead-title .subtitle { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.2rem; }
+  .masthead-right { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); text-align: right; line-height: 1.8; }
+  .masthead-tagline { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 0.92rem; color: var(--ink-mid); padding: 0.7rem 0 0.5rem; border-top: 1px solid var(--rule); margin-top: 0.5rem; text-align: center; }
+  .red-bar { height: 4px; background: var(--accent); margin: 0 -4rem; }
+
+  /* ─── TICKER BANNER ─── */
+  .update-banner { background: var(--ink); color: var(--paper); font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; padding: 0.4rem 4rem; display: flex; justify-content: space-between; }
+
+  /* ─── NAV ─── */
+  .nav-strip { background: var(--ink); padding: 0 4rem; display: flex; gap: 0; }
+  .nav-tab { background: transparent; border: none; color: rgba(255,255,255,0.55); font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.75rem 1.2rem; cursor: pointer; transition: all 0.15s; border-bottom: 3px solid transparent; }
+  .nav-tab:hover { color: rgba(255,255,255,0.9); }
+  .nav-tab.active { color: var(--paper); border-bottom-color: var(--accent); }
+
+  /* ─── PAGE WRAP ─── */
+  .page-wrap { max-width: 1400px; margin: 0 auto; padding: 2rem 4rem; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-hed { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0 1.2rem; }
+  .section-hed h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; white-space: nowrap; }
+  .section-hed .rule { flex: 1; height: 1px; background: var(--ink); }
+  .section-hed .tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); white-space: nowrap; }
+
+  /* ─── KPI ROW ─── */
+  .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.8rem; margin-bottom: 2rem; animation: fadeUp 0.5s ease both; }
+  .kpi-cell { background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; }
+  .kpi-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.35rem; }
+  .kpi-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; line-height: 1.1; margin-bottom: 0.3rem; }
+  .kpi-chg { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.05em; }
+  .kpi-chg.up { color: var(--green); }
+  .kpi-chg.down { color: var(--red); }
+  .chg-badge { background: var(--ink); color: var(--paper); font-size: 0.55rem; padding: 0.05rem 0.3rem; border-radius: 2px; margin-left: 0.3rem; }
+  .chg-badge.up { background: var(--green); }
+  .chg-badge.down { background: var(--red); }
+
+  /* ─── WHY GRID ─── */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2rem; }
+  .why-card { background: white; border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1.4rem; }
+  .why-card.negative { border-left: 4px solid var(--red); }
+  .why-card.positive { border-left: 4px solid var(--green); }
+  .why-card-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem; }
+  .why-card h4 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 0.7rem; line-height: 1.3; }
+  .why-card p { font-size: 0.82rem; line-height: 1.65; color: var(--ink-mid); margin-bottom: 0.5rem; }
+  .why-source { font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--ink-light); margin-top: 0.7rem; border-top: 1px solid var(--rule); padding-top: 0.5rem; }
+  .why-source a { color: var(--accent2); text-decoration: none; }
+  .why-source a:hover { text-decoration: underline; }
+
+  /* ─── STAT PILLS ─── */
+  .stat-pill { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 0.1rem 0.4rem; border-radius: 2px; margin: 0.1rem; }
+  .stat-pill.green { background: rgba(30,107,69,0.12); color: var(--green); border: 1px solid rgba(30,107,69,0.25); }
+  .stat-pill.red { background: rgba(176,58,46,0.1); color: var(--red); border: 1px solid rgba(176,58,46,0.2); }
+  .stat-pill.gold { background: rgba(183,134,13,0.1); color: var(--gold); border: 1px solid rgba(183,134,13,0.2); }
+  .stat-pill.blue { background: rgba(26,82,118,0.1); color: var(--accent2); border: 1px solid rgba(26,82,118,0.2); }
+
+  /* ─── INTERPRETATION BOX ─── */
+  .interp-box { background: white; color: var(--ink); border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1.8rem 2rem; margin-bottom: 2rem; }
+  .interp-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 1rem; color: var(--ink); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
+  .interp-box p { font-size: 0.84rem; line-height: 1.7; color: var(--ink-mid); margin-bottom: 0.8rem; }
+  .interp-box p:last-child { margin-bottom: 0; }
+
+  /* ─── DATA TABLE ─── */
+  .table-section { overflow-x: auto; margin-bottom: 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  thead { background: var(--ink); color: var(--paper); }
+  thead th { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 0.8rem; text-align: right; }
+  thead th:first-child, thead th:nth-child(2) { text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--rule); }
+  tbody tr:hover { background: var(--paper-warm); }
+  tbody td { padding: 0.55rem 0.8rem; text-align: right; }
+  tbody td:first-child { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); font-weight: 600; text-align: left; }
+  tbody td:nth-child(2) { text-align: left; font-size: 0.8rem; }
+  .cat-row td { background: rgba(13,17,23,0.04); font-weight: 700; font-size: 0.72rem; }
+  .up-val { color: var(--green); font-weight: 600; }
+  .dn-val { color: var(--red); font-weight: 600; }
+  .neut-val { color: var(--ink-light); }
+
+  /* ─── NARRATIVE GRID ─── */
+  .narrative-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  .narr-card { background: white; border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1.4rem; }
+  .narr-card h3 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent); display: inline-block; }
+  .narr-card p, .narr-card li { font-size: 0.81rem; line-height: 1.65; color: var(--ink-mid); margin-bottom: 0.5rem; }
+  .narr-card ul { padding-left: 1.2rem; }
+  .narr-source { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--ink-light); margin-top: 0.8rem; border-top: 1px solid var(--rule); padding-top: 0.5rem; }
+  .narr-source a { color: var(--accent2); text-decoration: none; }
+
+  /* ─── MINI CHARTS ─── */
+  .mini-charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .mini-chart-card { background: white; border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1rem; }
+  .mini-chart-title { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; }
+  .mini-chart-val { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .mini-chart-val.up { color: var(--green); }
+  .mini-chart-val.down { color: var(--red); }
+  .sparkline { width: 100%; height: 40px; display: block; }
+
+  /* ─── GLOBAL EVENTS ─── */
+  .global-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2rem; }
+  .global-card { background: white; border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1.4rem; }
+  .global-card.highlight { border-left: 4px solid var(--gold); }
+  .global-tag { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.4rem; }
+  .global-card h4 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 0.6rem; line-height: 1.3; }
+  .global-card p { font-size: 0.8rem; line-height: 1.65; color: var(--ink-mid); margin-bottom: 0.4rem; }
+  .global-source { font-family: 'DM Mono', monospace; font-size: 0.54rem; color: var(--ink-light); margin-top: 0.6rem; border-top: 1px solid var(--rule); padding-top: 0.4rem; }
+  .global-source a { color: var(--accent2); text-decoration: none; }
+
+  /* ─── SOURCES ─── */
+  .sources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+  .source-group { background: white; border: 1px solid var(--rule); border-left: 4px solid var(--accent2); border-radius: 6px; padding: 1.4rem; }
+  .source-group h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--ink); }
+  .source-item { font-size: 0.78rem; color: var(--ink-mid); padding: 0.45rem 0.6rem 0.45rem 1.1rem; border-left: 2px solid var(--rule); margin-bottom: 0.4rem; line-height: 1.4; }
+  .source-item a { color: var(--accent2); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 0.68rem; }
+  .source-item a:hover { text-decoration: underline; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--ink); color: rgba(255,255,255,0.55); font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; padding: 1rem 4rem; display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; }
+  footer strong { color: var(--paper); }
+
+  /* ─── TAB PANELS ─── */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── TABLET (≤900px) ─── */
+  @media (max-width: 900px) {
+    .masthead, .page-wrap, .nav-strip, .update-banner, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
+    .narrative-grid, .mini-charts { grid-template-columns: 1fr; }
+    .sources-grid { grid-template-columns: 1fr; }
+    .why-grid, .global-grid { grid-template-columns: 1fr; }
+    .red-bar { margin: 0 -1.5rem; }
+  }
+
+  /* ─── MOBILE (≤600px) ─── */
+  @media (max-width: 600px) {
+    .masthead { padding: 1rem 1rem 0; }
+    .masthead-inner { grid-template-columns: 1fr; gap: 0.3rem; text-align: center; }
+    .masthead-left, .masthead-right { display: none; }
+    .masthead-title h1 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+    .masthead-tagline { font-size: 0.8rem; padding: 0.6rem 0; }
+    .red-bar { margin: 0 -1rem; }
+    .update-banner { flex-direction: column; gap: 0.2rem; text-align: center; padding: 0.5rem 1rem; font-size: 0.58rem; }
+    .page-wrap { padding: 1rem; }
+    footer { flex-direction: column; gap: 0.3rem; text-align: center; padding: 1rem; font-size: 0.65rem; }
+    .nav-strip { padding: 0; position: relative; }
+    .nav-hamburger { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem 1rem; background: var(--ink); color: var(--paper); font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; cursor: pointer; user-select: none; }
+    .nav-hamburger-icon { font-size: 1.2rem; }
+    .nav-mobile-menu { display: none; flex-direction: column; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.1); }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-tab { border-radius: 0; border: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0.85rem 1rem; text-align: left; font-size: 0.78rem; color: rgba(255,255,255,0.7); background: transparent; width: 100%; }
+    .nav-tab.active { background: var(--accent); color: var(--paper); }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .kpi-cell { padding: 0.8rem; }
+    .kpi-value { font-size: 1.3rem; }
+    .why-card, .global-card { padding: 1rem; }
+    .why-card h4 { font-size: 0.95rem; }
+    .why-card p, .global-card p { font-size: 0.8rem; }
+    .interp-box { padding: 1rem; }
+    .interp-box h3 { font-size: 0.9rem; }
+    .interp-box p { font-size: 0.82rem; }
+    .table-section { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 600px; font-size: 0.75rem; }
+    .mini-charts { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .sources-grid { grid-template-columns: 1fr; }
+    .section-hed h2 { font-size: 1.1rem; }
+    .stat-pill { font-size: 0.58rem; padding: 0.08rem 0.35rem; }
+  }
+  @media (max-width: 380px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .kpi-value { font-size: 1.1rem; }
+    .masthead-title h1 { font-size: 1.4rem; }
+    .mini-charts { grid-template-columns: 1fr; }
+  }
+  .nav-hamburger { display: none; }
+  .nav-mobile-menu { display: flex; flex-direction: row; flex-wrap: wrap; }
+  @media (max-width: 600px) {
+    .nav-hamburger { display: flex; }
+    .nav-mobile-menu { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Update Banner -->
+<div class="update-banner">
+  <span>NEXT UPDATE: <span id="countdown">Saturday</span></span>
+  <span>DATA AS OF FRIDAY CLOSE — WEEKLY CADENCE</span>
+  <span>WEEK OF FEB 27, 2026</span>
+</div>
+
+<!-- Masthead -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-left">
+      <div>Weekly · Saturday</div>
+      <div>U.S. Markets</div>
+    </div>
+    <div class="masthead-title">
+      <h1>Capital Markets Weekly</h1>
+      <div class="subtitle">Cross-Asset Intelligence · Updated Every Saturday</div>
+    </div>
+    <div class="masthead-right">
+      <div>Feb 27, 2026</div>
+      <div>Friday Close</div>
+    </div>
+  </div>
+  <div class="masthead-tagline">"Hot inflation. AI anxiety. Geopolitical fog. February closes with a market in search of a floor."</div>
+  <div class="red-bar"></div>
+</div>
+
+<!-- Nav -->
+<nav class="nav-strip">
+  <div class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">
+    <span id="hamburger-label">☰ DASHBOARD</span>
+    <span class="nav-hamburger-icon" id="hamburger-icon">▾</span>
+  </div>
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <button class="nav-tab active" onclick="switchTab('dashboard', 'DASHBOARD', this)">Dashboard</button>
+    <button class="nav-tab" onclick="switchTab('table', 'FULL DATA TABLE', this)">Full Data Table</button>
+    <button class="nav-tab" onclick="switchTab('narrative', 'U.S. NARRATIVE', this)">U.S. Narrative</button>
+    <button class="nav-tab" onclick="switchTab('global', 'GLOBAL EVENTS', this)">Global Events</button>
+    <button class="nav-tab" onclick="switchTab('sources', 'SOURCES', this)">Sources</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                    DASHBOARD TAB                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-dashboard">
+<div class="page-wrap">
+
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-label">S&amp;P 500</div>
+      <div class="kpi-value">6,878.88</div>
+      <div class="kpi-chg down">▼ 0.44% WoW <span class="chg-badge up">+0.49% YTD</span></div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">Nasdaq</div>
+      <div class="kpi-value">22,668.21</div>
+      <div class="kpi-chg down">▼ 0.95% WoW <span class="chg-badge down">−2.47% YTD</span></div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">VIX</div>
+      <div class="kpi-value">19.86</div>
+      <div class="kpi-chg up">▲ 4.03% WoW <span class="chg-badge down">+32.84% YTD</span></div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">Gold (USD/oz)</div>
+      <div class="kpi-value">$5,230.50</div>
+      <div class="kpi-chg up">▲ 2.94% WoW <span class="chg-badge up">+20.92% YTD</span></div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">WTI Crude</div>
+      <div class="kpi-value">$67.02</div>
+      <div class="kpi-chg up">▲ 0.95% WoW <span class="chg-badge up">+16.72% YTD</span></div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">Bitcoin</div>
+      <div class="kpi-value">$64,952</div>
+      <div class="kpi-chg down">▼ 4.49% WoW <span class="chg-badge down">−25.78% YTD</span></div>
+    </div>
+  </div>
+
+  <!-- Week in Review -->
+  <div class="section-hed" style="margin-top:0">
+    <h2>Week in Review</h2>
+    <div class="rule"></div>
+    <div class="tag">Cross-Asset Interpretation · Feb 27, 2026</div>
+  </div>
+
+  <div class="interp-box">
+    <h3>Cross-Asset Interpretation · Week of Feb 23–27, 2026</h3>
+    <p><strong>The week's defining catalyst:</strong> a scorching January PPI report released Friday (headline +0.5% MoM vs. +0.3% est.; core +0.8% MoM vs. +0.3% est.) confirmed that inflation remains far from tamed, triggering an immediate selloff. The S&P 500 fell −0.44% on the week, the Nasdaq −0.95%, and the VIX surged above 20 intraday — capping a brutal February where the Nasdaq posted its worst monthly loss since March 2025 (−3%+) and the IGV software ETF shed nearly 10% in February alone.</p>
+    <p>Compounding the inflation shock, the "AI scare trade" accelerated throughout the week. Monday opened with Anthropic unveiling Claude Code — an AI tool automating work typically done by consulting firms — sending IBM −13%, Accenture, and CrowdStrike sharply lower. Nvidia beat spectacularly Wednesday ($68.1B revenue, +73% YoY), but the stock fell over 5% Thursday in a classic "sell the news" as investors demanded clarity on ROI from the $650B+ hyperscaler capex cycle. The week ended with a painful paradox: the best quarter in Nvidia history was not enough to sustain the AI trade.</p>
+    <p>Gold surged +2.94% to a fresh record $5,230/oz — its best weekly performance in months — driven by the combination of safe-haven demand (U.S.–Iran nuclear talks in Geneva stalled, technical talks moved to Vienna), PPI inflation feeding debasement concerns, and continued central bank buying. Meanwhile Bitcoin fell −4.49% to $64,952, now down −25.78% YTD. The 10-year Treasury yield dropped to 3.962% (−12.4 bps WoW), pricing in a "growth scare" override of the inflation signal — a stagflation setup that kept the Fed's hands tied. Credit spreads widened modestly; BBB OAS +4bps and HY OAS +3.47%.</p>
+  </div>
+
+  <!-- Why Markets Moved -->
+  <div class="section-hed">
+    <h2>Why Markets Moved This Week</h2>
+    <div class="rule"></div>
+    <div class="tag">Catalysts · Feb 23–27, 2026</div>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card negative">
+      <div class="why-card-label">📉 Why Stocks Fell</div>
+      <h4>PPI Shocker + AI Anxiety + Nvidia Paradox</h4>
+      <p>Three forces combined to push equities lower. Friday's January PPI came in far above consensus — headline +0.5% vs +0.3% est., core +0.8% vs +0.3% est. — reigniting "higher-for-longer" fears. Markets now push the first Fed rate cut to summer at the earliest, with only a 30% probability priced for May.</p>
+      <p>The AI scare trade continued after Anthropic's Claude Code announcement Monday disrupted consulting/software sectors. IBM lost 13%, Microsoft and CrowdStrike fell sharply. Thursday, Nvidia reported $68.1B in Q4 revenue (+73% YoY), obliterating estimates — yet the stock fell 5%+. The "Nvidia Paradox": even perfect results cannot sustain a trade under scrutiny for ROI. February closes with the S&P 500 barely positive YTD (+0.49%) and Nasdaq down −2.47%.</p>
+      <p>Notable movers:
+        <span class="stat-pill red">IBM −13%</span>
+        <span class="stat-pill red">Nvidia −5%+ Thu</span>
+        <span class="stat-pill red">CrowdStrike −10%</span>
+        <span class="stat-pill red">CoreWeave −20%</span>
+        <span class="stat-pill green">Dell +21.8%</span>
+        <span class="stat-pill green">Netflix +7% (Warner deal off)</span>
+      </p>
+      <div class="why-source">
+        Sources: <a href="https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html" target="_blank">CNBC Markets</a> ·
+        <a href="https://www.bls.gov/news.release/archives/ppi_02272026.htm" target="_blank">BLS PPI Release (Feb 27)</a> ·
+        <a href="https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/" target="_blank">Fortune / Nvidia Q4</a>
+      </div>
+    </div>
+
+    <div class="why-card negative">
+      <div class="why-card-label">🌡️ Inflation Alarm: PPI January 2026</div>
+      <h4>Core Wholesale Prices Surge +0.8% — Biggest Miss in Months</h4>
+      <p>The BLS released the January Producer Price Index on Friday Feb 27 at 8:30am ET. Headline PPI rose +0.5% MoM (est. +0.3%), accelerating from December's +0.4%. Core PPI (ex-food/energy) surged +0.8% — more than double the +0.3% consensus — and the highest monthly gain since July 2025. Year-over-year, core PPI hit 3.6% (up from 3.3% in December).</p>
+      <p>The driver was services inflation (+0.8% MoM), particularly a 14.4% jump in professional/commercial equipment wholesaling margins. Goods prices fell −0.3% (energy −2.7%), but core goods still rose +0.7%. The report complicates PCE forecasting for March 13: several PCE components use PPI as direct inputs (healthcare, financial services). Markets immediately repriced Fed cut expectations further out.</p>
+      <p>Context: <span class="stat-pill red">CPI Jan +2.4% YoY</span> <span class="stat-pill red">Core CPI +2.5% YoY</span> <span class="stat-pill red">Core PCE Dec +2.7% YoY</span> <span class="stat-pill red">Core PPI Jan +3.6% YoY</span> — all above the Fed's 2% target.</p>
+      <div class="why-source">
+        Sources: <a href="https://www.bls.gov/news.release/archives/ppi_02272026.htm" target="_blank">BLS PPI Jan 2026 (Feb 27)</a> ·
+        <a href="https://www.bls.gov/cpi/" target="_blank">BLS CPI Jan 2026 (Feb 13)</a> ·
+        <a href="https://www.bea.gov/data/personal-consumption-expenditures-price-index" target="_blank">BEA PCE (Feb 20)</a>
+      </div>
+    </div>
+
+    <div class="why-card positive">
+      <div class="why-card-label">🥇 Why Gold Hit a Record $5,230/oz</div>
+      <h4>Safe Haven, Debasement Hedge &amp; Geopolitical Premium All Firing</h4>
+      <p>Gold surged +2.94% WoW to $5,230.50/oz — a fresh all-time high and now +20.92% YTD. Three forces drove the move. First, the PPI shock elevated inflation expectations and reinforced gold's role as a debasement hedge, particularly as the Fed cannot cut despite slowing growth. Second, U.S.–Iran nuclear talks in Geneva on Feb 26 ended without a deal; the U.S. has deployed its largest Middle East military buildup in decades, keeping Hormuz risk premium elevated.</p>
+      <p>Third, the 10-year Treasury yield fell to 3.962% as growth fears intensified — a lower real yield environment historically favors gold. Central bank demand continues as a structural bid, while ETF inflows have accelerated. The gold/equity divergence this week (stocks ↓, gold ↑ sharply) signals that market participants are hedging rather than risk-on positioning.</p>
+      <p><span class="stat-pill gold">Gold +2.94% WoW</span> <span class="stat-pill gold">+20.92% YTD</span> <span class="stat-pill gold">$5,230/oz record</span> <span class="stat-pill blue">10Y yield 3.962%</span></p>
+      <div class="why-source">
+        Sources: <a href="https://finance.yahoo.com/quote/GC=F/" target="_blank">Yahoo Finance (GC=F)</a> ·
+        <a href="https://www.cnbc.com/2026/02/27/us-iran-nuclear-talks-oil-middle-east.html" target="_blank">CNBC / Iran–U.S. Talks</a> ·
+        <a href="https://fred.stlouisfed.org/series/DGS10" target="_blank">FRED 10-Year Treasury</a>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-label">📊 Labor Market &amp; Consumer Data</div>
+      <h4>Jobs Resilient, Confidence Ticked Up — But Cracks Forming</h4>
+      <p>Initial jobless claims for the week ending Feb 21 came in at 212,000 — up 4,000 from the prior week's revised 208,000, but below the 215,000 consensus. Continuing claims fell 31,000 to 1,833,000, near a 10-month low. The labor market remains in a "low hire / low fire" equilibrium, with federal employee claims still elevated (554 per week) but declining from shutdown-period highs.</p>
+      <p>Conference Board Consumer Confidence for February ticked up to 91.2 (from 89.0 revised in January), driven by slightly improved expectations (Expectations Index 72.0 from 67.2). However, the index remains well below the November 2024 peak of 112.8. Consumers are still cautious about discretionary spending; restaurants and travel plans softened. Housing data (new home sales Dec 745K SAAR) and pending sales data show early signs of spring demand but remain constrained by elevated mortgage rates (~6.8%).</p>
+      <div class="why-source">
+        Sources: <a href="https://fred.stlouisfed.org/series/ICSA" target="_blank">FRED Initial Claims (ICSA)</a> ·
+        <a href="https://www.conference-board.org/topics/consumer-confidence/" target="_blank">Conference Board Consumer Confidence</a> ·
+        <a href="https://www.census.gov/construction/nrs/pdf/newressales.pdf" target="_blank">Census Bureau New Home Sales (Feb 20)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Snapshot Charts -->
+  <div class="section-hed">
+    <h2>Snapshot Charts</h2>
+    <div class="rule"></div>
+    <div class="tag">WoW Movement</div>
+  </div>
+  <div class="mini-charts">
+    <div class="mini-chart-card">
+      <div class="mini-chart-title">S&amp;P 500 — Week of Feb 27</div>
+      <div class="mini-chart-val down">6,878.88</div>
+      <svg class="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none">
+        <polyline points="0,14 40,18 80,24 120,28 160,30 200,26" fill="none" stroke="#b03a2e" stroke-width="2"/>
+        <polyline points="0,14 40,18 80,24 120,28 160,30 200,26 200,40 0,40" fill="rgba(176,58,46,0.1)" stroke="none"/>
+      </svg>
+    </div>
+    <div class="mini-chart-card">
+      <div class="mini-chart-title">Gold (USD/oz) — Week of Feb 27</div>
+      <div class="mini-chart-val up">$5,230.50</div>
+      <svg class="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none">
+        <polyline points="0,30 40,26 80,22 120,16 160,10 200,6" fill="none" stroke="#b7860d" stroke-width="2"/>
+        <polyline points="0,30 40,26 80,22 120,16 160,10 200,6 200,40 0,40" fill="rgba(183,134,13,0.1)" stroke="none"/>
+      </svg>
+    </div>
+    <div class="mini-chart-card">
+      <div class="mini-chart-title">VIX — Week of Feb 27</div>
+      <div class="mini-chart-val down">19.86 ▲</div>
+      <svg class="sparkline" viewBox="0 0 200 40" preserveAspectRatio="none">
+        <polyline points="0,28 40,22 80,30 120,18 160,20 200,14" fill="none" stroke="#b03a2e" stroke-width="2"/>
+        <polyline points="0,28 40,22 80,30 120,18 160,20 200,14 200,40 0,40" fill="rgba(176,58,46,0.08)" stroke="none"/>
+      </svg>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+</div><!-- /tab-dashboard -->
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                   FULL DATA TABLE TAB                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-table">
+<div class="page-wrap">
+  <div class="section-hed" style="margin-top:0">
+    <h2>Weekly U.S. Capital Markets Dashboard</h2>
+    <div class="rule"></div>
+    <div class="tag">Data as of Feb 27, 2026 Close</div>
+  </div>
+  <div class="table-section">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Variable</th>
+          <th>12/31 Level</th>
+          <th>2/20 Level</th>
+          <th>2/27 Level</th>
+          <th>Net Chg (WoW)</th>
+          <th>% Chg (WoW)</th>
+          <th>Net Chg (YTD)</th>
+          <th>% Chg (YTD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cat-row"><td>Equity</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>S&amp;P 500 Index</td>
+          <td>6,845.50</td><td>6,909.51</td><td>6,878.88</td>
+          <td class="dn-val">−30.63</td><td class="dn-val">−0.44%</td>
+          <td class="up-val">+33.38</td><td class="up-val">+0.49%</td>
+        </tr>
+        <tr>
+          <td></td><td>Nasdaq Composite</td>
+          <td>23,241.99</td><td>22,886.07</td><td>22,668.21</td>
+          <td class="dn-val">−217.86</td><td class="dn-val">−0.95%</td>
+          <td class="dn-val">−573.78</td><td class="dn-val">−2.47%</td>
+        </tr>
+        <tr class="cat-row"><td>Volatility</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>VIX Index</td>
+          <td>14.95</td><td>19.09</td><td>19.86</td>
+          <td class="up-val">+0.77</td><td class="up-val">+4.03%</td>
+          <td class="up-val">+4.91</td><td class="up-val">+32.84%</td>
+        </tr>
+        <tr class="cat-row"><td>Interest Rates</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>U.S. 10-Year Treasury Yield (%)</td>
+          <td>4.163%</td><td>4.086%</td><td>3.962%</td>
+          <td class="dn-val">−0.124</td><td class="dn-val">−3.03%</td>
+          <td class="dn-val">−0.201</td><td class="dn-val">−4.83%</td>
+        </tr>
+        <tr>
+          <td></td><td>3-Month SOFR Rate (%)</td>
+          <td>4.01064%</td><td>3.76062%</td><td>3.73371%</td>
+          <td class="dn-val">−0.02691</td><td class="dn-val">−0.72%</td>
+          <td class="dn-val">−0.27693</td><td class="dn-val">−6.90%</td>
+        </tr>
+        <tr class="cat-row"><td>Credit Spreads</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>BBB U.S. Corporate OAS (%)</td>
+          <td>1.01%</td><td>0.99%</td><td>1.03%</td>
+          <td class="up-val">+0.04</td><td class="up-val">+4.04%</td>
+          <td class="up-val">+0.02</td><td class="up-val">+1.98%</td>
+        </tr>
+        <tr>
+          <td></td><td>U.S. High Yield OAS (%)</td>
+          <td>2.81%</td><td>2.88%</td><td>2.98%</td>
+          <td class="up-val">+0.10</td><td class="up-val">+3.47%</td>
+          <td class="up-val">+0.17</td><td class="up-val">+6.05%</td>
+        </tr>
+        <tr class="cat-row"><td>Crypto</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>Bitcoin (USD)</td>
+          <td>87,508.83</td><td>68,005.42</td><td>64,952.60</td>
+          <td class="dn-val">−3,052.82</td><td class="dn-val">−4.49%</td>
+          <td class="dn-val">−22,556.23</td><td class="dn-val">−25.78%</td>
+        </tr>
+        <tr class="cat-row"><td>Commodities</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>Gold (USD/oz)</td>
+          <td>4,325.60</td><td>5,080.90</td><td>5,230.50</td>
+          <td class="up-val">+149.60</td><td class="up-val">+2.94%</td>
+          <td class="up-val">+904.90</td><td class="up-val">+20.92%</td>
+        </tr>
+        <tr>
+          <td></td><td>Crude Oil WTI (USD/bbl)</td>
+          <td>57.42</td><td>66.39</td><td>67.02</td>
+          <td class="up-val">+0.63</td><td class="up-val">+0.95%</td>
+          <td class="up-val">+9.60</td><td class="up-val">+16.72%</td>
+        </tr>
+        <tr class="cat-row"><td>Currencies</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr>
+          <td></td><td>EUR/USD</td>
+          <td>1.1747</td><td>1.1769</td><td>1.1803</td>
+          <td class="up-val">+0.0034</td><td class="up-val">+0.29%</td>
+          <td class="up-val">+0.0056</td><td class="up-val">+0.48%</td>
+        </tr>
+        <tr>
+          <td></td><td>USD/JPY</td>
+          <td>156.413</td><td>155.16</td><td>156.035</td>
+          <td class="up-val">+0.875</td><td class="up-val">+0.56%</td>
+          <td class="dn-val">−0.378</td><td class="dn-val">−0.24%</td>
+        </tr>
+        <tr>
+          <td></td><td>USD/CNY</td>
+          <td>6.9961</td><td>6.9081</td><td>6.8574</td>
+          <td class="dn-val">−0.0507</td><td class="dn-val">−0.73%</td>
+          <td class="dn-val">−0.1387</td><td class="dn-val">−1.98%</td>
+        </tr>
+        <tr>
+          <td></td><td>CHF/USD</td>
+          <td>1.2631</td><td>1.2898</td><td>1.2933</td>
+          <td class="up-val">+0.0035</td><td class="up-val">+0.27%</td>
+          <td class="up-val">+0.0302</td><td class="up-val">+2.39%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--ink-light);margin-top:0.8rem;">YTD changes calculated from Dec 31, 2025 closing levels. Credit spread data as of most recent available date (BBB: 2/27; HY OAS: 2/26).</p>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                    U.S. NARRATIVE TAB                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-narrative">
+<div class="page-wrap">
+  <div class="section-hed" style="margin-top:0">
+    <h2>U.S. Market Narrative</h2>
+    <div class="rule"></div>
+    <div class="tag">Week of Feb 23–27, 2026</div>
+  </div>
+
+  <div class="narrative-grid">
+    <div class="narr-card">
+      <h3>Equities: February Closes Painfully</h3>
+      <p>U.S. equities ended February on a sour note, with all three major indices finishing the week lower. The S&P 500 lost −0.44% WoW to 6,878.88, remaining barely positive YTD (+0.49%). The Nasdaq, more heavily weighted in AI and technology names, fell −0.95% WoW to 22,668.21 — now down −2.47% YTD — posting its worst monthly performance since March 2025.</p>
+      <p>The week was defined by conflicting signals. Monday's session opened with an AI disruption shock after Anthropic released Claude Code. IBM collapsed 13% as markets priced in the threat to consulting-driven revenue. Through midweek, sentiment stabilized around Nvidia's earnings. But Thursday, despite reporting $68.1 billion in Q4 revenue (+73% YoY) and guiding Q1 to $78 billion, Nvidia fell over 5% — the "Nvidia Paradox," where flawless results were met with skepticism about the broader AI ROI story. Dell surged 21.8% on AI server demand, a lone bright spot in the tech complex.</p>
+      <p>Friday's hot PPI delivered the week's knockout blow. Futures dropped 400+ points at the open; the Dow closed −1.05% (−521 pts). Block (Square) added to the carnage with an announcement of 4,000+ layoffs (~half its workforce), raising fresh AI disruption concerns in fintech. The S&P 500 Equal Weight Index, however, touched a new all-time high Thursday — underscoring that the February selloff was concentrated in mega-cap tech, not broad market weakness.</p>
+      <div class="narr-source">Sources: <a href="https://www.cnbc.com/2026/02/26/stock-market-today-live-updates.html" target="_blank">CNBC Markets Live</a> · <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank">Schwab Market Update (Feb 27)</a> · <a href="https://finance.yahoo.com/news/stock-market-today-feb-20-221129656.html" target="_blank">Yahoo Finance</a></div>
+    </div>
+
+    <div class="narr-card">
+      <h3>Inflation: PPI Breaks the Narrative</h3>
+      <p>The week's dominant macro story was inflation. The January PPI, released Friday Feb 27, came in dramatically above expectations: headline +0.5% MoM (est. +0.3%), core +0.8% MoM (est. +0.3%). Year-over-year, core PPI accelerated to 3.6% — its highest reading since approximately mid-2025. Services inflation was the primary driver (+0.8% MoM), particularly a 14.4% surge in professional/commercial equipment wholesaling margins. Goods prices fell (energy −2.7%, food −1.5%), but core goods still rose +0.7%.</p>
+      <p>The PPI miss is consequential beyond the headline: multiple PCE components — the Fed's preferred inflation gauge — are computed directly from PPI subindices (healthcare, portfolio management, financial services). With PCE due March 13, markets now expect the January PCE to print firm, further delaying the Fed's rate-cutting timeline. The fed funds target remains 3.50–3.75%.</p>
+      <p>For full context: CPI January (released Feb 13) showed headline +0.2% MoM / +2.4% YoY; core CPI +2.5% YoY. PCE December (released Feb 20): headline +0.4% MoM / core +2.7% YoY. All measures remain above the 2% target with no clear convergence in sight.</p>
+      <div class="narr-source">Sources: <a href="https://www.bls.gov/news.release/archives/ppi_02272026.htm" target="_blank">BLS PPI Jan 2026</a> · <a href="https://www.bls.gov/cpi/" target="_blank">BLS CPI Jan 2026</a> · <a href="https://www.bea.gov/data/personal-consumption-expenditures-price-index" target="_blank">BEA PCE (Feb 20)</a></div>
+    </div>
+
+    <div class="narr-card">
+      <h3>Fixed Income: Rates Fall on Growth Fears</h3>
+      <p>In a counterintuitive move given the hot PPI print, the 10-year Treasury yield fell −12.4 bps WoW to 3.962% — breaking below the psychologically important 4.00% level. This "growth-scare override" reflects markets pricing in that slowing U.S. growth (Q4 GDP +1.4%, well below the +2.5% consensus) outweighs near-term inflation pressures for longer-duration rates. Weak consumer confidence, AI disruption fears, and a potentially deteriorating labor market are weighing on the growth outlook.</p>
+      <p>The 3-month SOFR rate ticked down to 3.73371%, reflecting expectations for eventual Fed easing, while remaining well above neutral. The short-end of the curve is anchored by the Fed's 3.50–3.75% target rate. Credit spreads widened modestly: BBB OAS +4bps to 1.03%, and HY OAS +10bps to 2.98% — both still historically tight but directionally concerning heading into what could be a more volatile March. The 10-year TIPS yield (real yield) also fell, directly supporting gold's run to new highs.</p>
+      <div class="narr-source">Sources: <a href="https://finance.yahoo.com/quote/%5ETNX/" target="_blank">Yahoo Finance (^TNX)</a> · <a href="https://fred.stlouisfed.org/series/SOFR" target="_blank">FRED SOFR</a> · <a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2" target="_blank">FRED HY OAS</a> · <a href="https://www.federalreserve.gov/monetarypolicy/openmarket.htm" target="_blank">Federal Reserve FOMC</a></div>
+    </div>
+
+    <div class="narr-card">
+      <h3>Commodities &amp; Currencies: Gold Record, Oil Steady</h3>
+      <p>Gold was the week's standout performer, surging +2.94% to a new record $5,230.50/oz (+20.92% YTD). The rally was driven by a convergence of drivers: PPI-driven inflation expectations, U.S.–Iran geopolitical risk premium (third round of Geneva talks ended without deal; technical talks in Vienna to follow), declining real yields, and continued central bank purchasing. J.P. Morgan forecasts gold to average $5,055/oz by Q4 2026.</p>
+      <p>WTI crude rose +0.95% to $67.02/bbl (+16.72% YTD), a muted weekly move despite high-stakes Iran talks — because the Geneva talks ended with an agreement to continue diplomacy (Vienna technical level talks), which pared the risk premium somewhat. Oil markets remain highly sensitive to any breakdown in negotiations. Bitcoin fell −4.49% to $64,952, now down −25.78% YTD — continuing its decoupling from risk assets and being hit by risk-off flows from the PPI shock. EUR/USD gained +0.29% as a weaker dollar backdrop (growth concerns) supported the euro; CHF/USD +0.27% reflected safe-haven flows into the franc.</p>
+      <div class="narr-source">Sources: <a href="https://finance.yahoo.com/quote/GC=F/" target="_blank">Yahoo Finance Gold</a> · <a href="https://www.cnbc.com/2026/02/27/us-iran-nuclear-talks-oil-middle-east.html" target="_blank">CNBC Iran Talks</a> · <a href="https://www.jpmorgan.com/insights/global-research/commodities/gold-prices" target="_blank">J.P. Morgan Gold Outlook</a></div>
+    </div>
+  </div>
+
+  <!-- ISM / Economic Context Box -->
+  <div class="section-hed">
+    <h2>Key Economic Data in Context</h2>
+    <div class="rule"></div>
+    <div class="tag">Data Dashboard · Feb 2026</div>
+  </div>
+  <div class="interp-box">
+    <h3>Macro Backdrop — February 2026</h3>
+    <p><strong>ISM Manufacturing (January 2026):</strong> Surged to 52.6% from 47.9% in December — first expansion in 12 months and best reading since 2022, driven by New Orders (57.1%), Production (55.9%), and Supplier Deliveries (54.4%). However, supply executives noted January "front-loading" ahead of expected tariff price increases may overstate underlying strength. February ISM Manufacturing due March 2, 2026.</p>
+    <p><strong>Jobless Claims (week ending Feb 21):</strong> 212,000 initial claims (+4,000 WoW), below the 215,000 estimate. Four-week moving average 220,250. Continuing claims fell 31,000 to 1,833,000 — near 10-month lows. Federal employee claims 554/week (falling from shutdown-period peaks). Labor market remains resilient in a "low hire / low fire" regime.</p>
+    <p><strong>Consumer Confidence (February 2026, Conference Board):</strong> Rose 2.2 pts to 91.2 (from 89.0 revised in January). Expectations Index improved to 72.0. However, the index remains well below the 4-year peak of 112.8 (November 2024). Consumers are cautious: discretionary spending intentions eased; restaurant and travel plans softened. The cutoff date was February 17, before the PPI shock — confidence may soften further in March.</p>
+    <p><strong>Housing (December 2025, Census Bureau / HUD):</strong> New home sales 745,000 SAAR (−1.7% MoM vs. November's 758K). Average sales price $532,600 (+4.7% YoY). Existing-home sales rose +5.1% in December (+1.4% YoY). Spring selling season showing early signs of life (pending home sales returning to YoY growth, purchase applications +8% YoY), but 30-year mortgage rates near 6.8% remain a constraint.</p>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                   GLOBAL EVENTS TAB                    -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-global">
+<div class="page-wrap">
+  <div class="section-hed" style="margin-top:0">
+    <h2>Global Events</h2>
+    <div class="rule"></div>
+    <div class="tag">Week of Feb 23–27, 2026 · Transmission to U.S. Markets</div>
+  </div>
+
+  <div class="global-grid">
+    <div class="global-card highlight">
+      <div class="global-tag">🌍 Geopolitics — Middle East</div>
+      <h4>U.S.–Iran Nuclear Talks in Geneva: No Deal, Diplomacy Continues</h4>
+      <p>The third round of indirect U.S.–Iran nuclear negotiations took place in Geneva on February 26, mediated by Oman's Foreign Minister Badr al-Busaidi. Led by U.S. Special Envoy Steve Witkoff and Jared Kushner on the American side, the six-hour session was described by Iran's FM Abbas Araghchi as the "longest and most serious" round yet, with "good progress" on elements of an agreement.</p>
+      <p>However, no deal was announced. The U.S. demands included destruction of Iran's three main nuclear sites (Fordow, Natanz, Isfahan), surrender of enriched uranium to the U.S., and a permanent (no sunset clause) deal. Iran rejected uranium transfer and insisted on enrichment continuation. Both sides agreed to technical-level talks in Vienna the following week. The U.S. maintains its largest Middle East military buildup in decades.</p>
+      <p><strong>Market Transmission:</strong> Oil prices rose on geopolitical risk but pared gains Friday after the "talks to continue" signal. Gold surged on safe-haven demand and Strait of Hormuz risk premium. The risk of military confrontation remains the highest since 2019, acting as a persistent oil/gold floor.</p>
+      <div class="global-source">Sources: <a href="https://www.cnbc.com/2026/02/27/us-iran-nuclear-talks-oil-middle-east.html" target="_blank">CNBC</a> · <a href="https://www.bloomberg.com/news/articles/2026-02-26/us-iran-to-hold-talks-at-technical-level-next-week-oman-says" target="_blank">Bloomberg</a> · <a href="https://www.npr.org/2026/02/26/g-s1-111595/u-s-iran-to-third-round-nuclear-talks" target="_blank">NPR / AP</a></div>
+    </div>
+
+    <div class="global-card highlight">
+      <div class="global-tag">🤖 Technology — AI Disruption</div>
+      <h4>Anthropic's Claude Code &amp; the "AI Scare Trade" Accelerates</h4>
+      <p>On Monday Feb 23, Anthropic released Claude Code — an agentic AI tool designed to automate analysis and complex tasks typically performed by consulting teams. The announcement immediately triggered what analysts are calling the "AI scare trade": IBM fell 13% (as markets priced disruption to its IT consulting business), Accenture and Cognizant dropped, and software stocks broadly sold off. Microsoft fell 3%, CrowdStrike −10%.</p>
+      <p>The Claude Code release follows weeks of AI disruption anxiety across sectors — trucking/logistics, commercial real estate, financial services, and software have all seen elevated selling pressure in February. The underlying concern: that agentic AI reduces headcount and software seats simultaneously, compressing margins across a wide range of industries.</p>
+      <p><strong>Market Transmission:</strong> IGV (iShares Software ETF) fell nearly 10% in February alone (−23% YTD). The AI disruption narrative is becoming a macro-level factor, not just a sector story — with implications for employment, corporate spending, and GDP composition.</p>
+      <div class="global-source">Sources: <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-drops-800-points-as-sp-500-nasdaq-slide-on-trump-tariff-fears-ai-scare-trade-210027026.html" target="_blank">Yahoo Finance</a> · <a href="https://www.cnbc.com/2026/02/22/stock-market-today-live-updates.html" target="_blank">CNBC (Feb 23)</a></div>
+    </div>
+
+    <div class="global-card">
+      <div class="global-tag">🏭 Earnings — Technology</div>
+      <h4>Nvidia Q4 FY2026: Record $68.1B Revenue, Stock Falls Anyway</h4>
+      <p>Nvidia reported Q4 FY2026 results Wednesday evening (Feb 25): revenue $68.1B (+73% YoY), far exceeding the $65.6B consensus. Q1 guidance of $78B also crushed the Street. Data center revenue was $58.4B. CEO Jensen Huang described AI as entering the "agentic era," with compute demand growing exponentially.</p>
+      <p>Despite the historic beat, NVDA fell over 5% Thursday in a classic "sell the news" event — now called the "Nvidia Paradox." Investors are scrutinizing whether $650B+ in annual hyperscaler AI capex (Alphabet, Amazon, Meta, Microsoft) will generate sufficient revenue to justify the investment. The stock's inability to rally on record results signals a maturing of the AI trade and rising demand for monetization proof points beyond chatbots.</p>
+      <p><strong>Market Transmission:</strong> Nvidia's response dragged Broadcom, Oracle, and CrowdStrike 2%+ lower Friday. The AI infrastructure complex — which drove most of the 2024–2025 bull market — is now in a period of consolidation and scrutiny.</p>
+      <div class="global-source">Sources: <a href="https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/" target="_blank">Fortune</a> · <a href="https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html" target="_blank">CNBC Nvidia Earnings</a></div>
+    </div>
+
+    <div class="global-card">
+      <div class="global-tag">🌐 Trade Policy — Tariffs</div>
+      <h4>Post-SCOTUS Tariff Landscape: New 15% Baseline, EU Pushes Back</h4>
+      <p>Following the Feb 20 Supreme Court ruling striking down the IEEPA "Liberation Day" tariffs, President Trump announced a replacement 15% global baseline tariff (raised from the 10% announced immediately post-ruling), effective immediately. He warned countries attempting to "play games" would face "much higher tariffs." The EU rejected any increase, stating "a deal is a deal" and calling on Washington to clarify its legal basis.</p>
+      <p>The tariff uncertainty continues to weigh on global trade outlooks. The Yale Budget Lab estimates the replacement tariffs will add 0.4–0.6% to CPI over 12 months. Apparel and goods PPI components moved higher in the January data, providing the first direct data evidence of tariff pass-through into wholesale prices. UBS downgraded U.S. equities to Neutral on tariff and growth uncertainty, shifting to Europe and EM overweights.</p>
+      <p><strong>Market Transmission:</strong> MSCI World ex-U.S. has gained +8% YTD vs. S&P 500 nearly flat — the dollar's weakness and cheaper non-U.S. valuations are drawing capital abroad. The tariff backdrop complicates Fed policy: goods disinflation is being offset by tariff-driven goods repricing.</p>
+      <div class="global-source">Sources: <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-drops-800-points-as-sp-500-nasdaq-slide-on-trump-tariff-fears-ai-scare-trade-210027026.html" target="_blank">Yahoo Finance</a> · <a href="https://www.bls.gov/news.release/archives/ppi_02272026.htm" target="_blank">BLS PPI Jan 2026</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                     SOURCES TAB                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-sources">
+<div class="page-wrap">
+  <div class="section-hed" style="margin-top:0">
+    <h2>Data Sources</h2>
+    <div class="rule"></div>
+    <div class="tag">All Citations · Week of Feb 27, 2026</div>
+  </div>
+
+  <div class="sources-grid">
+    <div class="source-group">
+      <h4>① Market Data — Yahoo Finance / FRED</h4>
+      <div class="source-item"><strong>S&P 500:</strong> <a href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank">finance.yahoo.com (^GSPC)</a></div>
+      <div class="source-item"><strong>Nasdaq:</strong> <a href="https://finance.yahoo.com/quote/%5EIXIC/" target="_blank">finance.yahoo.com (^IXIC)</a></div>
+      <div class="source-item"><strong>VIX:</strong> <a href="https://finance.yahoo.com/quote/%5EVIX/" target="_blank">finance.yahoo.com (^VIX)</a></div>
+      <div class="source-item"><strong>10-Year Treasury (^TNX):</strong> <a href="https://finance.yahoo.com/quote/%5ETNX/history/" target="_blank">finance.yahoo.com/quote/^TNX</a></div>
+      <div class="source-item"><strong>3-Month SOFR Averages:</strong> <a href="https://www.newyorkfed.org/markets/reference-rates/sofr-averages-and-index" target="_blank">newyorkfed.org — SOFR Averages and Index Data</a></div>
+      <div class="source-item"><strong>BBB OAS:</strong> <a href="https://fred.stlouisfed.org/series/BAMLC0A4CBBB" target="_blank">FRED BAMLC0A4CBBB</a></div>
+      <div class="source-item"><strong>HY OAS:</strong> <a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2" target="_blank">FRED BAMLH0A0HYM2</a></div>
+      <div class="source-item"><strong>Gold (GC=F):</strong> <a href="https://finance.yahoo.com/quote/GC=F/" target="_blank">finance.yahoo.com/quote/GC=F</a></div>
+      <div class="source-item"><strong>WTI Crude (CL=F):</strong> <a href="https://finance.yahoo.com/quote/CL=F/" target="_blank">finance.yahoo.com/quote/CL=F</a></div>
+      <div class="source-item"><strong>Bitcoin (BTC-USD):</strong> <a href="https://finance.yahoo.com/quote/BTC-USD/" target="_blank">finance.yahoo.com/quote/BTC-USD</a></div>
+    </div>
+
+    <div class="source-group">
+      <h4>② Economic Data — BLS / BEA / Federal Reserve</h4>
+      <div class="source-item"><strong>PPI Jan 2026 (Released Feb 27):</strong> <a href="https://www.bls.gov/news.release/archives/ppi_02272026.htm" target="_blank">bls.gov/news.release/ppi</a> — Headline +0.5% MoM, Core +0.8% MoM</div>
+      <div class="source-item"><strong>CPI Jan 2026 (Released Feb 13):</strong> <a href="https://www.bls.gov/cpi/" target="_blank">bls.gov/cpi</a> — Headline +0.2% MoM / +2.4% YoY; Core +2.5% YoY</div>
+      <div class="source-item"><strong>PCE Dec 2025 (Released Feb 20):</strong> <a href="https://www.bea.gov/data/personal-consumption-expenditures-price-index" target="_blank">bea.gov/data/pce-price-index</a> — Core +2.7% YoY; next release March 13</div>
+      <div class="source-item"><strong>Initial Jobless Claims (Week of Feb 21):</strong> <a href="https://fred.stlouisfed.org/series/ICSA" target="_blank">FRED ICSA</a> — 212,000; DOL release Feb 26</div>
+      <div class="source-item"><strong>New Home Sales Dec 2025:</strong> <a href="https://www.census.gov/construction/nrs/pdf/newressales.pdf" target="_blank">census.gov/construction/nrs</a> — 745K SAAR (Released Feb 20)</div>
+      <div class="source-item"><strong>Federal Reserve FOMC / Fed Funds Target:</strong> <a href="https://www.federalreserve.gov/monetarypolicy/openmarket.htm" target="_blank">federalreserve.gov</a> — 3.50–3.75%; next PCE release March 13; FOMC March 17–18</div>
+      <div class="source-item"><strong>H.15 Selected Interest Rates:</strong> <a href="https://www.federalreserve.gov/releases/h15/" target="_blank">federalreserve.gov/releases/h15</a></div>
+    </div>
+
+    <div class="source-group">
+      <h4>③ Economic Indicators — ISM / Conference Board / Other</h4>
+      <div class="source-item"><strong>ISM Manufacturing PMI Jan 2026 (52.6%):</strong> <a href="https://www.ismworld.org" target="_blank">ismworld.org</a> — Released Feb 2, 2026; Feb PMI due March 2</div>
+      <div class="source-item"><strong>Conference Board Consumer Confidence Feb 2026 (91.2):</strong> <a href="https://www.conference-board.org/topics/consumer-confidence/" target="_blank">conference-board.org</a></div>
+      <div class="source-item"><strong>News &amp; Analysis — WSJ Markets:</strong> <a href="https://www.wsj.com/market-data" target="_blank">wsj.com/market-data</a></div>
+      <div class="source-item"><strong>MarketWatch:</strong> <a href="https://www.marketwatch.com/markets" target="_blank">marketwatch.com/markets</a></div>
+      <div class="source-item"><strong>Bloomberg Markets:</strong> <a href="https://www.bloomberg.com/markets" target="_blank">bloomberg.com/markets</a></div>
+      <div class="source-item"><strong>CNBC Markets:</strong> <a href="https://www.cnbc.com/markets/" target="_blank">cnbc.com/markets</a></div>
+      <div class="source-item"><strong>Schwab Market Update:</strong> <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank">schwab.com</a></div>
+      <div class="source-item"><strong>FRED Economic Research (St. Louis Fed):</strong> <a href="https://fred.stlouisfed.org" target="_blank">fred.stlouisfed.org</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>Capital Markets Weekly · Week of Feb 27, 2026</span>
+  <span><strong>For Educational Purposes Only</strong> · Not Financial Advice</span>
+  <span>Sources: BLS · BEA · Federal Reserve · FRED · Yahoo Finance · Conference Board · ISM</span>
+</footer>
+
+<script>
+  function switchTab(name, label, el) {
+    document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(e => e.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (el) el.classList.add('active');
+    const lbl = document.getElementById('hamburger-label');
+    if (lbl) lbl.textContent = '☰ ' + (label || name.toUpperCase());
+    const menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.remove('open');
+    const icon = document.getElementById('hamburger-icon');
+    if (icon) icon.textContent = '▾';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleMobileNav() {
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('hamburger-icon');
+    if (menu.classList.toggle('open')) {
+      icon.textContent = '▴';
+    } else {
+      icon.textContent = '▾';
+    }
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const day = now.getDay();
+    const daysUntilSat = day === 6 ? 0 : 6 - day;
+    const nextSat = new Date(now);
+    nextSat.setDate(now.getDate() + daysUntilSat);
+    nextSat.setHours(8, 0, 0, 0);
+    const diff = nextSat - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').textContent = 'Updated Today';
+      return;
+    }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const d = Math.floor(h / 24);
+    if (d > 0) document.getElementById('countdown').textContent = `${d}d ${h % 24}h`;
+    else document.getElementById('countdown').textContent = `${h}h ${m}m`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+</script>
+</body>
+</html>
